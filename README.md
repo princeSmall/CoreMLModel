@@ -79,17 +79,24 @@ apt-get install python-pip
 * >>> import coremltools
 * >>> from sklearn.linear_model import LinearRegression
 * >>> import pandas as pd
+*  load data
 * >>> data = pd.read_csv('/Users/sansi/Desktop/CoreMLModel/input_data.csv')
+*  train a model
 * >>> model = LinearRegression()
 * >>> model.fit(data[["Square_Feet"]], data["Price"])
+*  convert and save the scikit-learn model
 * >>> coreml_model = coremltools.converters.sklearn.convert(model, "Square_Feet", "Price")
+*  set model metadata
 * >>> coreml_model.author = 'tongle'
 * >>> coreml_model.license = 'BSD'
 * >>> coreml_model.short_description = 'Predicts the price of a house in the Seattle area.'
+*  set feature descriptions manually
 * >>> coreml_model.input_description['Square_Feet'] = 'Size (in square feet)'
+*  set the output descriptions
 * >>> coreml_model.output_description['Price'] = 'Price of the house'
+*  save the mdel
 * >>> coreml_model.save('HousePricer.mlmodel')
-* >>> 
+* 
 
 如果没有一点python功底，我都要死在电脑前了，哈哈
 
